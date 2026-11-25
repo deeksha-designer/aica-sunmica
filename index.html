@@ -6,6 +6,9 @@
   <meta name="description" content="Explore Aica Sunmica laminates, architectural surfaces and real projects. Find a showroom or enquire about a sample.">
   <meta name="theme-color" content="#f8f5ef">
   <title>Aica Sunmica | Surfaces for the spaces we shape</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="main.js" defer></script>
 </head>
@@ -17,10 +20,12 @@
       <a href="#" class="brand"><img src="assets/logo.png" width="1200" height="213" alt="Aica Sunmica"></a>
       <button class="menu" aria-expanded="false" aria-controls="navigation">Menu</button>
       <nav id="navigation" aria-label="Main navigation">
-        <a href="#collections">Collections</a><a href="#finishes">Finishes</a><a href="#applications">Spaces</a><a href="#visualizer">Visualizer</a><a href="#professionals">Professionals</a>
+        <button class="mega-trigger" type="button" aria-expanded="false" aria-controls="products-menu">Products</button><a href="https://aicasunmica.com/projects">Projects</a><a href="https://aicasunmica.com/insights">Insights</a><button class="mega-trigger" type="button" aria-expanded="false" aria-controls="company-menu">About</button><a href="https://aicasunmica.com/contact-us">Contact</a>
       </nav>
       <a class="button nav-cta" href="#samples">Request a sample</a>
     </div>
+    <div class="mega-menu" id="products-menu" hidden><div class="shell mega-grid"><div><h2>Surfaces for every brief.</h2><p>Explore laminates and panels by performance, finish and application.</p><a class="text-link" href="https://aicasunmica.com/product">All products</a></div><a class="mega-image" href="https://aicasunmica.com/decorative-laminates"><img src="assets/concepts/decorative.jpg" alt="Decorative laminate interior"><strong>Decorative laminates</strong></a><div class="mega-links"><div><h3>Collections</h3><a href="https://aicasunmica.com/1mm-sakura">Sakura</a><a href="https://aicasunmica.com/veltouch">VelTouch</a><a href="https://aicasunmica.com/cerarl">Cerarl</a></div><div><h3>Performance</h3><a href="https://aicasunmica.com/aicas-exclusive-range">Exclusive range</a><a href="https://aicasunmica.com/ultra-shield-exterior-hpl">Exterior HPL</a><a href="https://aicasunmica.com/industrial-laminates">Industrial laminates</a></div></div></div></div>
+    <div class="mega-menu" id="company-menu" hidden><div class="shell mega-grid"><div><h2>Designed in Japan. Made for India.</h2><p>Material intelligence, world-class manufacturing and a growing national network.</p><a class="text-link" href="https://aicasunmica.com/about">Our story</a></div><a class="mega-image" href="https://aicasunmica.com/experience-center"><img src="assets/showroom.webp" alt="Aica experience centre"><strong>Experience centre</strong></a><div class="mega-links"><div><h3>Company</h3><a href="https://aicasunmica.com/about-aica">About Aica</a><a href="https://aicasunmica.com/history">History</a><a href="https://aicasunmica.com/infrastructure">Infrastructure</a></div><div><h3>Support</h3><a href="https://aicasunmica.com/certifications">Certifications</a><a href="https://aicasunmica.com/faqs">FAQs</a><a href="https://aicasunmica.com/csr">CSR</a></div></div></div></div>
   </header>
   <main id="main">
     <section class="hero" aria-label="Featured collections">
@@ -31,8 +36,8 @@
         <img class="hero-image" src="assets/hero/veltouch.jpg" alt="" decoding="async">
         <div class="hero-copy" aria-live="off">
           <p class="eyebrow" id="hero-kicker">Cerarl · Fire-retardant panels</p>
-          <h1 id="hero-title">The quiet<br>strength of stone.</h1>
-          <p id="hero-desc">Stone-inspired finishes for interior walls.</p>
+          <h1 id="hero-title">Surfaces shape how space feels.</h1>
+          <p id="hero-desc">High-performance laminates and architectural panels, made in India with Japanese material technology.</p>
           <a id="hero-link" class="button light" href="https://aicasunmica.com/cerarl">Explore Cerarl</a>
         </div>
         <button class="hero-rotation" type="button" hidden>Pause slideshow</button>
@@ -170,14 +175,15 @@
     </section>
 
     <section class="section shell" id="projects">
-      <div class="section-heading"><div><p class="eyebrow">Design concepts</p><h2>Spaces made with Aica.</h2></div><a class="text-link" href="https://aicasunmica.com/projects">View completed projects</a></div>
+      <div class="section-heading"><div><p class="eyebrow">Completed work</p><h2>Projects</h2></div><a class="text-link" href="https://aicasunmica.com/projects">View all projects</a></div>
       <div class="filters" aria-label="Filter projects">
-        <button data-filter="all" aria-pressed="true">All</button><button data-filter="residential" aria-pressed="false">Residential</button><button data-filter="commercial" aria-pressed="false">Commercial</button>
+        <button data-filter="residential" aria-pressed="true">Residential</button><button data-filter="commercial" aria-pressed="false">Commercial</button>
       </div>
       <div class="project-grid">
-        <a data-project="residential" href="https://aicasunmica.com/1mm-sakura#2"><img src="assets/concepts/residential.jpg" alt="" loading="lazy"><strong>A calm kitchen</strong><small>Sakura · E 114/1114</small></a>
-        <a data-project="commercial" href="https://aicasunmica.com/cerarl#2"><img src="assets/concepts/office.jpg" alt="" loading="lazy"><strong>A stone-led reception</strong><small>Cerarl · FAN1729ZMN</small></a>
-        <a data-project="commercial" href="https://aicasunmica.com/veltouch#2"><img src="assets/concepts/retail.jpg" alt="" loading="lazy"><strong>A softly lit boutique</strong><small>VelTouch · G 307/1307</small></a>
+        <a data-project="residential" href="https://aicasunmica.com/residential"><img src="assets/projects/residential.webp" alt="Completed Aica residential interior" loading="lazy"><strong>Residential interior</strong><small>Residential</small></a>
+        <a data-project="commercial" href="https://aicasunmica.com/tata-aia-life-insurance-kolkata" hidden><img src="assets/projects/tata-aia.webp" alt="TATA AIA Life Insurance Kolkata completed project" loading="lazy"><strong>TATA AIA Life Insurance</strong><small>Kolkata</small></a>
+        <a data-project="commercial" href="https://aicasunmica.com/soch-showroom-vijaywada" hidden><img src="assets/projects/soch-vijaywada.webp" alt="Soch showroom Vijayawada completed project" loading="lazy"><strong>Soch showroom</strong><small>Vijayawada</small></a>
+        <a data-project="commercial" href="https://aicasunmica.com/shriram-finance-chennai" hidden><img src="assets/projects/shriram-finance.webp" alt="Shriram Finance Chennai completed project" loading="lazy"><strong>Shriram Finance</strong><small>Chennai</small></a>
       </div>
     </section>
 
