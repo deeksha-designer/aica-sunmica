@@ -1,5 +1,5 @@
 const features = [
-  ['Cerarl · Fire-retardant panels', 'Surfaces shape\nhow space feels.', 'High-performance laminates and architectural panels, made in India with Japanese material technology.', 'Explore Cerarl', 'cerarl'],
+  ['Cerarl · Fire-retardant panels', 'The quiet\nstrength of stone.', 'Stone-inspired finishes for interior walls.', 'Explore Cerarl', 'cerarl'],
   ['Ultra-Shield · Exterior HPL', 'A finish for\nthe elements.', 'Exterior laminates for architectural façades.', 'Explore Ultra-Shield', 'ultra-shield-exterior-hpl'],
   ['Sakura · Decorative laminates', 'A softer side\nof surfaces.', 'Explore the 1 mm decorative laminate collection.', 'Explore Sakura', '1mm-sakura'],
   ['VelTouch · Velvet-matte finish', 'A surface you\nwant to touch.', 'A soft matte finish for contemporary interiors.', 'Explore VelTouch', 'veltouch']
@@ -77,35 +77,11 @@ menu.addEventListener('click', () => {
 navigation.addEventListener('click', event => {
   if (event.target.closest('a')) menu.setAttribute('aria-expanded', 'false');
 });
-const megaTriggers = document.querySelectorAll('.mega-trigger');
-const megaMenus = document.querySelectorAll('.mega-menu');
-function closeMegaMenus() {
-  megaTriggers.forEach(trigger => trigger.setAttribute('aria-expanded', 'false'));
-  megaMenus.forEach(panel => { panel.hidden = true; });
-}
-megaTriggers.forEach(trigger => trigger.addEventListener('click', event => {
-  event.stopPropagation();
-  const panel = document.querySelector('#' + trigger.getAttribute('aria-controls'));
-  const open = trigger.getAttribute('aria-expanded') === 'true';
-  closeMegaMenus();
-  if (!open) { trigger.setAttribute('aria-expanded', 'true'); panel.hidden = false; }
-}));
-document.addEventListener('click', event => { if (!event.target.closest('.header')) closeMegaMenus(); });
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
     menu.setAttribute('aria-expanded', 'false');
     menu.focus();
   }
-  if (event.key === 'Escape') closeMegaMenus();
-});
-
-const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
-  if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target); }
-}), { threshold: .12 });
-document.querySelectorAll('.section-heading, .collection, .project-grid a, .paths > div, .journal-grid article, .about-inner > div').forEach((element, index) => {
-  element.classList.add('reveal');
-  element.style.setProperty('--reveal-delay', `${(index % 4) * 70}ms`);
-  revealObserver.observe(element);
 });
 
 const shadeTrack = document.querySelector('#shade-track');
