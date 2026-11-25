@@ -6,6 +6,9 @@
   <meta name="description" content="Explore Aica Sunmica laminates, architectural surfaces and real projects. Find a showroom or enquire about a sample.">
   <meta name="theme-color" content="#f8f5ef">
   <title>Aica Sunmica | Surfaces for the spaces we shape</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="main.js" defer></script>
 </head>
@@ -152,7 +155,8 @@
           <label class="sr-only" for="room-query">Search by shade code</label>
           <div class="room-search-field">
             <img id="room-selected-swatch" src="assets/shades/veltouch-2.jpg" alt="" width="32" height="32">
-            <input id="room-query" type="search" placeholder="Search by shade code" autocomplete="off" aria-controls="room-results">
+            <input id="room-query" type="search" placeholder="Search or select a shade" autocomplete="off" aria-controls="room-results" aria-expanded="false" aria-autocomplete="list">
+            <button class="room-dropdown-toggle" type="button" aria-label="Show all shades" aria-controls="room-results" aria-expanded="false"><span aria-hidden="true">⌄</span></button>
           </div>
           <p id="room-search-status" class="sr-only" role="status"></p>
           <ul id="room-results" aria-label="Matching shades" hidden></ul>
@@ -187,10 +191,13 @@
     </div></section>
     <section class="section shell" id="professionals">
       <div class="section-heading"><div><p class="eyebrow">Design resources</p><h2>Plan your next project.</h2></div></div>
-      <div class="paths">
-        <div><h3>Homeowners</h3><a class="text-link" href="#visualizer">Try the room visualizer</a></div>
-        <div><h3>Architects &amp; designers</h3><a class="text-link" href="https://aicasunmica.com/certifications">View certifications</a></div>
-        <div><h3>Dealers &amp; carpenters</h3><a class="text-link" href="https://aicasunmica.com/contact-us">Contact Aica</a></div>
+      <div class="project-planner">
+        <a class="planner-image" href="#visualizer"><img src="assets/concepts/visualizer.jpg" alt="Contemporary interior showing coordinated laminate surfaces" loading="lazy"><span>Explore surfaces in context</span></a>
+        <div class="planner-paths">
+          <a href="#visualizer"><span>For homeowners</span><strong>Visualize a room</strong><small>Try shades in a realistic interior before choosing a sample.</small><i aria-hidden="true">↗</i></a>
+          <a href="https://aicasunmica.com/certifications"><span>For architects &amp; designers</span><strong>Specify with confidence</strong><small>Review certifications and technical product information.</small><i aria-hidden="true">↗</i></a>
+          <a href="https://aicasunmica.com/contact-us"><span>For dealers &amp; carpenters</span><strong>Talk to Aica</strong><small>Connect with the team for product and application support.</small><i aria-hidden="true">↗</i></a>
+        </div>
       </div>
     </section>
 

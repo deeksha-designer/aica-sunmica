@@ -132,6 +132,7 @@ const roomQuery = document.querySelector('#room-query');
 const roomResults = document.querySelector('#room-results');
 const roomSearchStatus = document.querySelector('#room-search-status');
 const roomNoResults = document.querySelector('#room-no-results');
+const roomDropdownToggle = document.querySelector('.room-dropdown-toggle');
 const roomShades = Array.from(shades, shade => ({
   code: shade.querySelector('strong').textContent,
   collection: Array.from(shadeFilters).find(filter => filter.dataset.shadeFilter === shade.dataset.shade).textContent.trim(),
@@ -151,9 +152,17 @@ function normalizeShadeCode(code) {
   return code.toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
-function updateRoomResults() {
+function setRoomDropdown(open) {
+  roomResults.hidden = !open;
+  roomQuery.setAttribute('aria-expanded', String(open));
+  roomDropdownToggle.setAttribute('aria-expanded', String(open));
+}
+
+function updateRoomResults(forceOpen = false) {
   const query = normalizeShadeCode(roomQuery.value);
-  const matches = query ? roomShades.filter(shade => normalizeShadeCode(shade.code).includes(query)) : [];
+  const matches = query
+    ? roomShades.filter(shade => normalizeShadeCode(shade.code + shade.collection).includes(query))
+    : roomShades;
   roomResults.replaceChildren();
   matches.forEach(shade => {
     const item = document.createElement('li');
@@ -165,35 +174,47 @@ function updateRoomResults() {
     image.width = 36;
     image.height = 36;
     const label = document.createElement('span');
-    label.textContent = shade.code + ' · ' + shade.collection;
+    const code = document.createElement('strong');
+    const collection = document.createElement('small');
+    code.textContent = shade.code;
+    collection.textContent = shade.collection;
+    label.append(code, collection);
     button.append(image, label);
     button.addEventListener('click', () => {
       applyRoomShade(shade.swatch, shade.collection + ' · ' + shade.code);
       roomQuery.value = '';
-      updateRoomResults();
-      roomQuery.focus();
+      setRoomDropdown(false);
     });
     item.append(button);
     roomResults.append(item);
   });
-  roomResults.hidden = matches.length === 0;
+  setRoomDropdown((forceOpen || query.length > 0) && matches.length > 0);
   roomNoResults.hidden = !query || matches.length > 0;
-  roomSearchStatus.textContent = query ? matches.length + ' matching shades' : '';
+  roomSearchStatus.textContent = matches.length + (matches.length === 1 ? ' shade' : ' shades') + ' available';
 }
 
 roomOptions.forEach(button => button.addEventListener('click', () => {
   applyRoomShade(button.querySelector('img').getAttribute('src'), button.dataset.roomShade);
 }));
-roomQuery.addEventListener('input', updateRoomResults);
+roomQuery.addEventListener('input', () => updateRoomResults(true));
+roomQuery.addEventListener('focus', () => updateRoomResults(true));
+roomQuery.addEventListener('click', () => updateRoomResults(true));
+roomDropdownToggle.addEventListener('click', () => {
+  const open = roomResults.hidden;
+  if (open) { updateRoomResults(true); roomQuery.focus(); }
+  else setRoomDropdown(false);
+});
 roomSearch.addEventListener('submit', event => {
   event.preventDefault();
   roomResults.querySelector('button')?.click();
 });
 roomSearch.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && roomQuery.value) {
+  if (event.key === 'Escape') {
     event.preventDefault();
-    roomQuery.value = '';
-    updateRoomResults();
+    setRoomDropdown(false);
     roomQuery.focus();
   }
+});
+document.addEventListener('click', event => {
+  if (!roomSearch.contains(event.target)) setRoomDropdown(false);
 });
