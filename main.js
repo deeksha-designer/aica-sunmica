@@ -11,6 +11,7 @@ const heroKicker = document.querySelector('#hero-kicker');
 const heroTitle = document.querySelector('#hero-title');
 const heroDesc = document.querySelector('#hero-desc');
 const heroLink = document.querySelector('#hero-link');
+const heroLinkLabel = heroLink.querySelector('span');
 const rotation = document.querySelector('.hero-rotation');
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 let currentFeature = 0;
@@ -23,7 +24,7 @@ function showFeature(index) {
   heroKicker.textContent = category;
   heroTitle.textContent = title;
   heroDesc.textContent = description;
-  heroLink.textContent = linkText;
+  heroLinkLabel.textContent = linkText;
   heroLink.href = 'https://aicasunmica.com/' + slug;
   heroImages.forEach((image, i) => image.classList.toggle('is-current', i === index));
   featureButtons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
@@ -37,7 +38,7 @@ function scheduleRotation() {
     rotationTimer = setInterval(() => {
       const next = (currentFeature + 1) % features.length;
       if (heroImages[next].complete && heroImages[next].naturalWidth) showFeature(next);
-    }, 3000);
+    }, 6000);
   }
 }
 
@@ -71,17 +72,37 @@ filters.forEach(button => button.addEventListener('click', () => {
 
 const menu = document.querySelector('.menu');
 const navigation = document.querySelector('#navigation');
+const navDropdowns = document.querySelectorAll('.nav-dropdown');
+const megaMenus = document.querySelectorAll('.mega-menu');
+function closeMegaMenus() {
+  navDropdowns.forEach(button => button.setAttribute('aria-expanded', 'false'));
+  megaMenus.forEach(panel => { panel.hidden = true; });
+}
 menu.addEventListener('click', () => {
   menu.setAttribute('aria-expanded', String(menu.getAttribute('aria-expanded') === 'false'));
 });
+navDropdowns.forEach(button => button.addEventListener('click', event => {
+  event.stopPropagation();
+  const panel = document.querySelector('#' + button.getAttribute('aria-controls'));
+  const isOpen = button.getAttribute('aria-expanded') === 'true';
+  closeMegaMenus();
+  if (!isOpen) {
+    button.setAttribute('aria-expanded', 'true');
+    panel.hidden = false;
+  }
+}));
 navigation.addEventListener('click', event => {
   if (event.target.closest('a')) menu.setAttribute('aria-expanded', 'false');
+});
+document.addEventListener('click', event => {
+  if (!event.target.closest('.header')) closeMegaMenus();
 });
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
     menu.setAttribute('aria-expanded', 'false');
     menu.focus();
   }
+  if (event.key === 'Escape') closeMegaMenus();
 });
 
 const shadeTrack = document.querySelector('#shade-track');

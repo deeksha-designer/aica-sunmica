@@ -9,21 +9,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="style.css">
   <script src="main.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="header">
-    <div class="utility"><span>Japanese technology. Made in India.</span><div><a href="https://aicasunmica.com/e-catalouge">E-catalogue</a><a href="#visit">Find a dealer</a></div></div>
+    <div class="utility"><div class="utility-inner"><span>Japanese technology. Made in India.</span><nav aria-label="Utility navigation"><a href="https://aicasunmica.com/certifications">Certifications</a><a href="https://aicasunmica.com/locations"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Locations</a><a class="utility-cta" href="https://aicasunmica.com/e-catalouge">E-catalogue <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></nav></div></div>
     <div class="nav">
       <a href="#" class="brand"><img src="assets/logo.png" width="1200" height="213" alt="Aica Sunmica"></a>
-      <button class="menu" aria-expanded="false" aria-controls="navigation">Menu</button>
+      <button class="menu" aria-expanded="false" aria-controls="navigation"><span>Menu</span><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
       <nav id="navigation" aria-label="Main navigation">
-        <a href="#collections">Collections</a><a href="#finishes">Finishes</a><a href="#applications">Spaces</a><a href="#visualizer">Visualizer</a><a href="#professionals">Professionals</a>
+        <button class="nav-dropdown" type="button" aria-expanded="false" aria-controls="products-menu">Products <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+        <a href="https://aicasunmica.com/projects">Projects</a>
+        <button class="nav-dropdown" type="button" aria-expanded="false" aria-controls="resources-menu">Resources <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+        <a href="https://aicasunmica.com/insights">Insights</a><a href="https://aicasunmica.com/about">About Aica</a>
       </nav>
-      <a class="button nav-cta" href="#samples">Request a sample</a>
+      <div class="nav-actions"><a class="nav-search" href="https://aicasunmica.com/search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></a><a class="button nav-cta" href="#samples">Request a sample <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
     </div>
+    <div class="mega-menu" id="products-menu" hidden><div class="mega-inner"><div class="mega-title"><h2>Our product range</h2><a href="https://aicasunmica.com/product">View all products <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div><div class="mega-links"><a href="https://aicasunmica.com/decorative-laminates"><strong>Decorative laminates</strong><span>Surfaces for expressive interiors</span></a><a href="https://aicasunmica.com/aicas-exclusive-range"><strong>Exclusive range</strong><span>Specialty performance surfaces</span></a><a href="https://aicasunmica.com/ultra-shield-exterior-hpl"><strong>Exterior HPL</strong><span>Durable architectural façades</span></a><a href="https://aicasunmica.com/industrial-laminates"><strong>Industrial laminates</strong><span>Engineered for demanding use</span></a></div><a class="mega-feature" href="https://aicasunmica.com/veltouch"><img src="assets/veltouch.webp" alt="VelTouch premium matte laminate"><span>Discover VelTouch <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a></div></div>
+    <div class="mega-menu" id="resources-menu" hidden><div class="mega-inner"><div class="mega-title"><h2>Design resources</h2><a href="#professionals">Plan a project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div><div class="mega-links"><a href="https://aicasunmica.com/e-catalouge"><strong>E-catalogues</strong><span>Browse collections and shades</span></a><a href="https://aicasunmica.com/certifications"><strong>Certifications</strong><span>Technical and compliance resources</span></a><a href="https://aicasunmica.com/visualizers"><strong>Room visualizer</strong><span>See surfaces in context</span></a><a href="https://aicasunmica.com/faqs"><strong>FAQs</strong><span>Product and application answers</span></a></div><a class="mega-feature" href="#visualizer"><img src="assets/visualizer.webp" alt="Aica room visualizer"><span>Visualize your room <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a></div></div>
   </header>
   <main id="main">
     <section class="hero" aria-label="Featured collections">
@@ -36,15 +42,15 @@
           <p class="eyebrow" id="hero-kicker">Cerarl · Fire-retardant panels</p>
           <h1 id="hero-title">The quiet<br>strength of stone.</h1>
           <p id="hero-desc">Stone-inspired finishes for interior walls.</p>
-          <a id="hero-link" class="button light" href="https://aicasunmica.com/cerarl">Explore Cerarl</a>
+          <a id="hero-link" class="button light" href="https://aicasunmica.com/cerarl"><span>Explore Cerarl</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
         <button class="hero-rotation" type="button" hidden>Pause slideshow</button>
       </div>
       <div class="feature-strip" aria-label="Choose a featured collection">
-        <button type="button" data-feature="0" aria-pressed="true"><span>Cerarl</span><small>Fire-retardant panels</small></button>
-        <button type="button" data-feature="1" aria-pressed="false"><span>Ultra-Shield</span><small>Exterior HPL</small></button>
-        <button type="button" data-feature="2" aria-pressed="false"><span>Sakura</span><small>Decorative laminates</small></button>
-        <button type="button" data-feature="3" aria-pressed="false"><span>VelTouch</span><small>Velvet-matte finish</small></button>
+        <button type="button" data-feature="0" aria-pressed="true"><span>Cerarl</span><small>Fire-retardant panels</small><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+        <button type="button" data-feature="1" aria-pressed="false"><span>Ultra-Shield</span><small>Exterior HPL</small><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+        <button type="button" data-feature="2" aria-pressed="false"><span>Sakura</span><small>Decorative laminates</small><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+        <button type="button" data-feature="3" aria-pressed="false"><span>VelTouch</span><small>Velvet-matte finish</small><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
       </div>
     </section>
 
@@ -72,8 +78,8 @@
             <button type="button" data-shade-filter="veltouch" data-category-url="https://aicasunmica.com/veltouch#2" aria-pressed="false">VelTouch</button>
           </div>
           <div class="shade-controls">
-            <button type="button" id="shade-prev" aria-controls="shade-track" disabled><span aria-hidden="true">‹</span><span class="sr-only">Previous shades</span></button>
-            <button type="button" id="shade-next" aria-controls="shade-track"><span aria-hidden="true">›</span><span class="sr-only">Next shades</span></button>
+            <button type="button" id="shade-prev" aria-controls="shade-track" disabled><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span class="sr-only">Previous shades</span></button>
+            <button type="button" id="shade-next" aria-controls="shade-track"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">Next shades</span></button>
           </div>
         </div>
         <ul id="shade-track" class="shade-track" aria-label="Featured shade swatches" tabindex="0">
@@ -156,7 +162,7 @@
           <div class="room-search-field">
             <img id="room-selected-swatch" src="assets/shades/veltouch-2.jpg" alt="" width="32" height="32">
             <input id="room-query" type="search" placeholder="Search or select a shade" autocomplete="off" aria-controls="room-results" aria-expanded="false" aria-autocomplete="list">
-            <button class="room-dropdown-toggle" type="button" aria-label="Show all shades" aria-controls="room-results" aria-expanded="false"><span aria-hidden="true">⌄</span></button>
+            <button class="room-dropdown-toggle" type="button" aria-label="Show all shades" aria-controls="room-results" aria-expanded="false"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
           </div>
           <p id="room-search-status" class="sr-only" role="status"></p>
           <ul id="room-results" aria-label="Matching shades" hidden></ul>
@@ -194,9 +200,9 @@
       <div class="project-planner">
         <a class="planner-image" href="#visualizer"><img src="assets/concepts/visualizer.jpg" alt="Contemporary interior showing coordinated laminate surfaces" loading="lazy"><span>Explore surfaces in context</span></a>
         <div class="planner-paths">
-          <a href="#visualizer"><span>For homeowners</span><strong>Visualize a room</strong><small>Try shades in a realistic interior before choosing a sample.</small><i aria-hidden="true">↗</i></a>
-          <a href="https://aicasunmica.com/certifications"><span>For architects &amp; designers</span><strong>Specify with confidence</strong><small>Review certifications and technical product information.</small><i aria-hidden="true">↗</i></a>
-          <a href="https://aicasunmica.com/contact-us"><span>For dealers &amp; carpenters</span><strong>Talk to Aica</strong><small>Connect with the team for product and application support.</small><i aria-hidden="true">↗</i></a>
+          <a href="#visualizer"><span>For homeowners</span><strong>Visualize a room</strong><small>Try shades in a realistic interior before choosing a sample.</small><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          <a href="https://aicasunmica.com/certifications"><span>For architects &amp; designers</span><strong>Specify with confidence</strong><small>Review certifications and technical product information.</small><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          <a href="https://aicasunmica.com/contact-us"><span>For dealers &amp; carpenters</span><strong>Talk to Aica</strong><small>Connect with the team for product and application support.</small><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
         </div>
       </div>
     </section>
