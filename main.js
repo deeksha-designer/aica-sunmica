@@ -109,39 +109,110 @@ const shadeTrack = document.querySelector('#shade-track');
 const shadeFilters = document.querySelectorAll('[data-shade-filter]');
 const shades = shadeTrack.querySelectorAll('[data-shade]');
 const shadeCategory = document.querySelector('#shade-category');
-const shadePrevious = document.querySelector('#shade-prev');
-const shadeNext = document.querySelector('#shade-next');
+const shadeWindow = document.querySelector('.shade-loop-window');
+const reduceShadeMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let shadeOffset = 0;
+let shadeLoopWidth = 0;
+let shadePaused = false;
+let shadeLastFrame = performance.now();
+let shadeDragStart = 0;
+let shadeDragOffset = 0;
+let shadeDragged = false;
 
-function updateShadeControls() {
-  shadePrevious.disabled = shadeTrack.scrollLeft <= 1;
-  shadeNext.disabled = shadeTrack.scrollLeft + shadeTrack.clientWidth >= shadeTrack.scrollWidth - 2;
+shades.forEach(shade => {
+  const code = shade.querySelector('strong').textContent.trim();
+  const collection = Array.from(shadeFilters).find(filter => filter.dataset.shadeFilter === shade.dataset.shade).textContent.trim();
+  const overlay = document.createElement('span');
+  overlay.className = 'shade-overlay';
+  overlay.innerHTML = '<i class="fa-solid fa-plus" aria-hidden="true"></i><strong>' + code + '</strong><small>' + collection + '</small><em>Know More</em>';
+  shade.querySelector('a').append(overlay);
+});
+
+function normalizeShadeOffset() {
+  if (!shadeLoopWidth) return;
+  while (shadeOffset >= shadeLoopWidth) shadeOffset -= shadeLoopWidth;
+  while (shadeOffset < 0) shadeOffset += shadeLoopWidth;
 }
 
-function moveShades(direction) {
-  const first = shadeTrack.querySelector('li:not([hidden])');
-  const gap = Number.parseFloat(getComputedStyle(shadeTrack).columnGap);
-  const step = first.getBoundingClientRect().width + gap;
-  const itemsPerPage = Math.max(1, Math.floor((shadeTrack.clientWidth + gap) / step));
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  shadeTrack.scrollBy({ left: direction * step * itemsPerPage, behavior: reduceMotion ? 'instant' : 'smooth' });
+function renderShadePosition() {
+  normalizeShadeOffset();
+  shadeTrack.style.transform = 'translate3d(' + -shadeOffset + 'px, 0, 0)';
+}
+
+function buildShadeLoop(group) {
+  shadeTrack.querySelectorAll('[data-shade-clone]').forEach(clone => clone.remove());
+  const activeShades = Array.from(shades).filter(shade => shade.dataset.shade === group);
+  shades.forEach(shade => { shade.hidden = shade.dataset.shade !== group; });
+  activeShades.forEach(shade => {
+    const clone = shade.cloneNode(true);
+    clone.dataset.shadeClone = 'true';
+    clone.setAttribute('aria-hidden', 'true');
+    clone.querySelector('a').tabIndex = -1;
+    shadeTrack.append(clone);
+  });
+  shadeOffset = 0;
+  requestAnimationFrame(() => {
+    const firstClone = shadeTrack.querySelector('[data-shade-clone]');
+    shadeLoopWidth = firstClone ? firstClone.offsetLeft : 0;
+    renderShadePosition();
+  });
+}
+
+function animateShades(now) {
+  const elapsed = Math.min(now - shadeLastFrame, 40);
+  shadeLastFrame = now;
+  if (!shadePaused && !reduceShadeMotion && shadeLoopWidth) {
+    shadeOffset += elapsed * .025;
+    renderShadePosition();
+  }
+  requestAnimationFrame(animateShades);
 }
 
 shadeFilters.forEach(button => button.addEventListener('click', () => {
   const group = button.dataset.shadeFilter;
-  shades.forEach(shade => {
-    shade.hidden = shade.dataset.shade !== group;
-  });
   shadeFilters.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
   shadeCategory.href = button.dataset.categoryUrl;
   shadeCategory.textContent = 'View all ' + button.textContent + ' shades';
-  shadeTrack.scrollTo({ left: 0, behavior: 'instant' });
-  updateShadeControls();
+  buildShadeLoop(group);
 }));
-shadePrevious.addEventListener('click', () => moveShades(-1));
-shadeNext.addEventListener('click', () => moveShades(1));
-shadeTrack.addEventListener('scroll', updateShadeControls, { passive: true });
-new ResizeObserver(updateShadeControls).observe(shadeTrack);
-updateShadeControls();
+
+shadeWindow.addEventListener('mouseenter', () => { shadePaused = true; });
+shadeWindow.addEventListener('mouseleave', () => { shadePaused = false; });
+shadeWindow.addEventListener('focusin', () => { shadePaused = true; });
+shadeWindow.addEventListener('focusout', () => { shadePaused = false; });
+shadeWindow.addEventListener('pointerdown', event => {
+  if (event.pointerType === 'mouse') return;
+  shadePaused = true;
+  shadeDragged = false;
+  shadeDragStart = event.clientX;
+  shadeDragOffset = shadeOffset;
+  shadeWindow.classList.add('is-dragging');
+  shadeWindow.setPointerCapture(event.pointerId);
+});
+shadeWindow.addEventListener('pointermove', event => {
+  if (!shadeWindow.hasPointerCapture(event.pointerId)) return;
+  const distance = event.clientX - shadeDragStart;
+  if (Math.abs(distance) > 5) shadeDragged = true;
+  shadeOffset = shadeDragOffset - distance;
+  renderShadePosition();
+});
+shadeWindow.addEventListener('pointerup', event => {
+  if (shadeWindow.hasPointerCapture(event.pointerId)) shadeWindow.releasePointerCapture(event.pointerId);
+  shadeWindow.classList.remove('is-dragging');
+  shadePaused = false;
+});
+shadeTrack.addEventListener('click', event => {
+  const shade = event.target.closest('li');
+  if (!shade || matchMedia('(hover: hover)').matches || shadeDragged) return;
+  if (!shade.classList.contains('is-active')) {
+    event.preventDefault();
+    shadeTrack.querySelectorAll('.is-active').forEach(item => item.classList.remove('is-active'));
+    shade.classList.add('is-active');
+  }
+});
+new ResizeObserver(() => buildShadeLoop(document.querySelector('[data-shade-filter][aria-pressed="true"]').dataset.shadeFilter)).observe(shadeWindow);
+buildShadeLoop('cerarl');
+requestAnimationFrame(animateShades);
 
 const roomOptions = document.querySelectorAll('[data-room-shade]');
 const roomFinish = document.querySelector('.room-finish');

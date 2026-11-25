@@ -8,7 +8,7 @@
   <title>Aica Sunmica | Surfaces for the spaces we shape</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="style.css">
   <script src="main.js" defer></script>
@@ -16,7 +16,7 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="header">
-    <div class="utility"><div class="utility-inner"><span>Japanese technology. Made in India.</span><nav aria-label="Utility navigation"><a href="https://aicasunmica.com/certifications">Certifications</a><a href="https://aicasunmica.com/locations"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Locations</a><a class="utility-cta" href="https://aicasunmica.com/e-catalouge">E-catalogue <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></nav></div></div>
+    <div class="utility"><div class="utility-inner"><nav aria-label="Utility navigation"><a href="#visualizer">Homeowners</a><a href="#professionals">Architects</a><a href="https://aicasunmica.com/contact-us">Dealers</a><a class="utility-cta" href="#samples">Contact us</a></nav></div></div>
     <div class="nav">
       <a href="#" class="brand"><img src="assets/logo.png" width="1200" height="213" alt="Aica Sunmica"></a>
       <button class="menu" aria-expanded="false" aria-controls="navigation"><span>Menu</span><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
@@ -26,7 +26,7 @@
         <button class="nav-dropdown" type="button" aria-expanded="false" aria-controls="resources-menu">Resources <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
         <a href="https://aicasunmica.com/insights">Insights</a><a href="https://aicasunmica.com/about">About Aica</a>
       </nav>
-      <div class="nav-actions"><a class="nav-search" href="https://aicasunmica.com/search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></a><a class="button nav-cta" href="#samples">Request a sample <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+      <div class="nav-actions"><a class="nav-search" href="https://aicasunmica.com/locations" aria-label="Find an Aica location"><i class="fa-solid fa-globe" aria-hidden="true"></i></a><a class="nav-search" href="https://aicasunmica.com/search" aria-label="Search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></a><a class="nav-account" href="https://aicasunmica.com/e-catalouge"><i class="fa-regular fa-circle-user" aria-hidden="true"></i><span>E-catalogue</span></a></div>
     </div>
     <div class="mega-menu" id="products-menu" hidden><div class="mega-inner"><div class="mega-title"><h2>Our product range</h2><a href="https://aicasunmica.com/product">View all products <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div><div class="mega-links"><a href="https://aicasunmica.com/decorative-laminates"><strong>Decorative laminates</strong><span>Surfaces for expressive interiors</span></a><a href="https://aicasunmica.com/aicas-exclusive-range"><strong>Exclusive range</strong><span>Specialty performance surfaces</span></a><a href="https://aicasunmica.com/ultra-shield-exterior-hpl"><strong>Exterior HPL</strong><span>Durable architectural façades</span></a><a href="https://aicasunmica.com/industrial-laminates"><strong>Industrial laminates</strong><span>Engineered for demanding use</span></a></div><a class="mega-feature" href="https://aicasunmica.com/veltouch"><img src="assets/veltouch.webp" alt="VelTouch premium matte laminate"><span>Discover VelTouch <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a></div></div>
     <div class="mega-menu" id="resources-menu" hidden><div class="mega-inner"><div class="mega-title"><h2>Design resources</h2><a href="#professionals">Plan a project <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div><div class="mega-links"><a href="https://aicasunmica.com/e-catalouge"><strong>E-catalogues</strong><span>Browse collections and shades</span></a><a href="https://aicasunmica.com/certifications"><strong>Certifications</strong><span>Technical and compliance resources</span></a><a href="https://aicasunmica.com/visualizers"><strong>Room visualizer</strong><span>See surfaces in context</span></a><a href="https://aicasunmica.com/faqs"><strong>FAQs</strong><span>Product and application answers</span></a></div><a class="mega-feature" href="#visualizer"><img src="assets/visualizer.webp" alt="Aica room visualizer"><span>Visualize your room <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a></div></div>
@@ -82,7 +82,7 @@
             <button type="button" id="shade-next" aria-controls="shade-track"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="sr-only">Next shades</span></button>
           </div>
         </div>
-        <ul id="shade-track" class="shade-track" aria-label="Featured shade swatches" tabindex="0">
+        <div class="shade-loop-window"><ul id="shade-track" class="shade-track" aria-label="Featured shade swatches" tabindex="0">
         <li data-shade="cerarl"><a href="https://aicasunmica.com/cerarl#2"><strong>CFN10241ZD</strong><img src="assets/shades/cerarl-1.jpg" width="640" height="640" loading="lazy" alt=""></a></li>
         <li data-shade="cerarl"><a href="https://aicasunmica.com/cerarl#2"><strong>CFN10242ZN</strong><img src="assets/shades/cerarl-2.jpg" width="640" height="640" loading="lazy" alt=""></a></li>
         <li data-shade="cerarl"><a href="https://aicasunmica.com/cerarl#2"><strong>FAN1729ZMN</strong><img src="assets/shades/cerarl-3.jpg" width="640" height="640" loading="lazy" alt=""></a></li>
@@ -119,7 +119,7 @@
         <li data-shade="veltouch" hidden><a href="https://aicasunmica.com/veltouch#2"><strong>G 512/1512</strong><img src="assets/shades/veltouch-10.jpg" width="640" height="640" loading="lazy" alt=""></a></li>
         <li data-shade="veltouch" hidden><a href="https://aicasunmica.com/veltouch#2"><strong>G 515/1515</strong><img src="assets/shades/veltouch-11.jpg" width="640" height="640" loading="lazy" alt=""></a></li>
         <li data-shade="veltouch" hidden><a href="https://aicasunmica.com/veltouch#2"><strong>G 519/1519</strong><img src="assets/shades/veltouch-12.jpg" width="640" height="640" loading="lazy" alt=""></a></li>
-        </ul>
+        </ul></div>
       </div>
     </section>
 
@@ -196,14 +196,12 @@
       <div><p>Made in Rudrapur, Uttarakhand, for homes, workplaces and architecture.</p><dl><div><dt>800+</dt><dd>Designs and finishes</dd></div><div><dt>11</dt><dd>Branches</dd></div></dl></div>
     </div></section>
     <section class="section shell" id="professionals">
-      <div class="section-heading"><div><p class="eyebrow">Design resources</p><h2>Plan your next project.</h2></div></div>
+      <div class="planner-heading"><p class="eyebrow">Design resources</p><h2>Plan your next project.</h2></div>
       <div class="project-planner">
-        <a class="planner-image" href="#visualizer"><img src="assets/concepts/visualizer.jpg" alt="Contemporary interior showing coordinated laminate surfaces" loading="lazy"><span>Explore surfaces in context</span></a>
-        <div class="planner-paths">
-          <a href="#visualizer"><span>For homeowners</span><strong>Visualize a room</strong><small>Try shades in a realistic interior before choosing a sample.</small><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-          <a href="https://aicasunmica.com/certifications"><span>For architects &amp; designers</span><strong>Specify with confidence</strong><small>Review certifications and technical product information.</small><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-          <a href="https://aicasunmica.com/contact-us"><span>For dealers &amp; carpenters</span><strong>Talk to Aica</strong><small>Connect with the team for product and application support.</small><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-        </div>
+        <a class="planner-card" href="#visualizer"><span class="planner-visual"><img src="assets/concepts/residential.jpg" alt="Contemporary Aica kitchen interior" loading="lazy"></span><span class="planner-label"><strong>For homeowners</strong><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>
+        <a class="planner-card" href="https://aicasunmica.com/certifications"><span class="planner-visual"><img src="assets/concepts/office.jpg" alt="Architectural workplace finished with Aica surfaces" loading="lazy"></span><span class="planner-label"><strong>For architects &amp; designers</strong><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>
+        <a class="planner-card" href="https://aicasunmica.com/contact-us"><span class="planner-visual"><img src="assets/concepts/retail.jpg" alt="Premium retail interior using laminate surfaces" loading="lazy"></span><span class="planner-label"><strong>For dealers &amp; carpenters</strong><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>
+        <a class="planner-card" href="https://aicasunmica.com/e-catalouge"><span class="planner-visual"><img src="assets/concepts/exclusive.jpg" alt="Aica premium laminate application" loading="lazy"></span><span class="planner-label"><strong>Product catalogues</strong><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>
       </div>
     </section>
 
