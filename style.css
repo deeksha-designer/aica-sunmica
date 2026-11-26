@@ -683,7 +683,7 @@ footer { padding: 0; background: #fff; color: #121212; }
 
 /* Four verified Aica statistics */
 .about .about-stats { max-width: 33rem; }
-.about .about-stats > div { min-height: 7.25rem; padding: 1.15rem 0; }
+.about .about-stats > div { height: 8rem; min-height: 0; padding: 1.15rem 0; }
 .about .about-stats > div::after { margin-top: 1.15rem; }
 .about .about-stats dt { font-size: clamp(3.1rem, 4.2vw, 4.25rem); }
 .about .about-stats dd { max-width: none; color: #fff; font-size: clamp(.95rem, 1.25vw, 1.12rem); line-height: 1.35; }
@@ -695,7 +695,7 @@ footer { padding: 0; background: #fff; color: #121212; }
 @media (max-width: 700px) {
   .mega-project-links { grid-template-columns: 1fr; }
   .mega-project-links a { min-height: 4.75rem; }
-  .about .about-stats > div { min-height: 6.5rem; }
+  .about .about-stats > div { height: 7rem; min-height: 0; }
   .about .about-stats dt { font-size: clamp(2.75rem, 14vw, 3.6rem); }
 }
 
