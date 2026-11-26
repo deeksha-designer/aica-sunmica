@@ -17,17 +17,23 @@ const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 let currentFeature = 0;
 let rotationEnabled = !motionPreference.matches;
 let rotationTimer;
+let featureTransitionTimer;
 
 function showFeature(index) {
   const [category, title, description, linkText, slug] = features[index];
   currentFeature = index;
-  heroKicker.textContent = category;
-  heroTitle.textContent = title;
-  heroDesc.textContent = description;
-  heroLinkLabel.textContent = linkText;
-  heroLink.href = 'https://aicasunmica.com/' + slug;
   heroImages.forEach((image, i) => image.classList.toggle('is-current', i === index));
   featureButtons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+  clearTimeout(featureTransitionTimer);
+  heroCopy.classList.add('is-changing');
+  featureTransitionTimer = setTimeout(() => {
+    heroKicker.textContent = category;
+    heroTitle.textContent = title;
+    heroDesc.textContent = description;
+    heroLinkLabel.textContent = linkText;
+    heroLink.href = 'https://aicasunmica.com/' + slug;
+    requestAnimationFrame(() => heroCopy.classList.remove('is-changing'));
+  }, motionPreference.matches ? 0 : 180);
 }
 
 function scheduleRotation() {
@@ -74,9 +80,17 @@ const menu = document.querySelector('.menu');
 const navigation = document.querySelector('#navigation');
 const navDropdowns = document.querySelectorAll('.nav-dropdown');
 const megaMenus = document.querySelectorAll('.mega-menu');
+let megaCloseTimer;
 function closeMegaMenus() {
+  clearTimeout(megaCloseTimer);
   navDropdowns.forEach(button => button.setAttribute('aria-expanded', 'false'));
   megaMenus.forEach(panel => { panel.hidden = true; });
+}
+function openMegaMenu(button) {
+  const panel = document.querySelector('#' + button.getAttribute('aria-controls'));
+  closeMegaMenus();
+  button.setAttribute('aria-expanded', 'true');
+  panel.hidden = false;
 }
 menu.addEventListener('click', () => {
   menu.setAttribute('aria-expanded', String(menu.getAttribute('aria-expanded') === 'false'));
@@ -87,10 +101,21 @@ navDropdowns.forEach(button => button.addEventListener('click', event => {
   const isOpen = button.getAttribute('aria-expanded') === 'true';
   closeMegaMenus();
   if (!isOpen) {
-    button.setAttribute('aria-expanded', 'true');
-    panel.hidden = false;
+    openMegaMenu(button);
   }
 }));
+navDropdowns.forEach(button => {
+  button.addEventListener('pointerenter', () => {
+    if (matchMedia('(min-width: 1041px)').matches) openMegaMenu(button);
+  });
+  button.addEventListener('focus', () => {
+    if (matchMedia('(min-width: 1041px)').matches) openMegaMenu(button);
+  });
+});
+document.querySelector('.header').addEventListener('pointerleave', () => {
+  if (matchMedia('(min-width: 1041px)').matches) megaCloseTimer = setTimeout(closeMegaMenus, 140);
+});
+document.querySelector('.header').addEventListener('pointerenter', () => clearTimeout(megaCloseTimer));
 navigation.addEventListener('click', event => {
   if (event.target.closest('a')) menu.setAttribute('aria-expanded', 'false');
 });
@@ -172,7 +197,7 @@ shadeFilters.forEach(button => button.addEventListener('click', () => {
   const group = button.dataset.shadeFilter;
   shadeFilters.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
   shadeCategory.href = button.dataset.categoryUrl;
-  shadeCategory.textContent = 'View all ' + button.textContent + ' shades';
+  shadeCategory.querySelector('span').textContent = 'View all ' + button.textContent + ' shades';
   buildShadeLoop(group);
 }));
 
@@ -310,3 +335,32 @@ roomSearch.addEventListener('keydown', event => {
 document.addEventListener('click', event => {
   if (!roomSearch.contains(event.target)) setRoomDropdown(false);
 });
+
+const aboutStats = document.querySelector('.about-stats');
+const statNumbers = document.querySelectorAll('[data-count]');
+function animateStatistics() {
+  statNumbers.forEach(number => {
+    const target = Number(number.dataset.count);
+    if (motionPreference.matches) {
+      number.textContent = target.toLocaleString('en-IN');
+      return;
+    }
+    const startedAt = performance.now();
+    const duration = 1300;
+    function tick(now) {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      number.textContent = Math.round(target * eased).toLocaleString('en-IN');
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+if (aboutStats) {
+  const statsObserver = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    animateStatistics();
+    statsObserver.disconnect();
+  }, { threshold: .35 });
+  statsObserver.observe(aboutStats);
+}
