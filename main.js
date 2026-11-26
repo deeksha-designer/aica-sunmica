@@ -80,7 +80,14 @@ const menu = document.querySelector('.menu');
 const navigation = document.querySelector('#navigation');
 const navDropdowns = document.querySelectorAll('.nav-dropdown');
 const megaMenus = document.querySelectorAll('.mega-menu');
+const searchToggle = document.querySelector('#site-search-toggle');
+const siteSearch = document.querySelector('#site-search');
+const siteSearchQuery = document.querySelector('#site-search-query');
 let megaCloseTimer;
+function closeSiteSearch() {
+  searchToggle.setAttribute('aria-expanded', 'false');
+  siteSearch.hidden = true;
+}
 function closeMegaMenus() {
   clearTimeout(megaCloseTimer);
   navDropdowns.forEach(button => button.setAttribute('aria-expanded', 'false'));
@@ -89,6 +96,7 @@ function closeMegaMenus() {
 function openMegaMenu(button) {
   const panel = document.querySelector('#' + button.getAttribute('aria-controls'));
   closeMegaMenus();
+  closeSiteSearch();
   button.setAttribute('aria-expanded', 'true');
   panel.hidden = false;
 }
@@ -116,18 +124,35 @@ document.querySelector('.header').addEventListener('pointerleave', () => {
   if (matchMedia('(min-width: 1041px)').matches) megaCloseTimer = setTimeout(closeMegaMenus, 140);
 });
 document.querySelector('.header').addEventListener('pointerenter', () => clearTimeout(megaCloseTimer));
+searchToggle.addEventListener('click', event => {
+  event.stopPropagation();
+  const willOpen = siteSearch.hidden;
+  closeMegaMenus();
+  siteSearch.hidden = !willOpen;
+  searchToggle.setAttribute('aria-expanded', String(willOpen));
+  if (willOpen) siteSearchQuery.focus();
+});
 navigation.addEventListener('click', event => {
   if (event.target.closest('a')) menu.setAttribute('aria-expanded', 'false');
 });
 document.addEventListener('click', event => {
-  if (!event.target.closest('.header')) closeMegaMenus();
+  if (!event.target.closest('.header')) {
+    closeMegaMenus();
+    closeSiteSearch();
+  }
 });
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
     menu.setAttribute('aria-expanded', 'false');
     menu.focus();
   }
-  if (event.key === 'Escape') closeMegaMenus();
+  if (event.key === 'Escape') {
+    closeMegaMenus();
+    if (!siteSearch.hidden) {
+      closeSiteSearch();
+      searchToggle.focus();
+    }
+  }
 });
 
 const shadeTrack = document.querySelector('#shade-track');
