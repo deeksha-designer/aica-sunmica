@@ -381,11 +381,13 @@ function animateStatistics() {
     requestAnimationFrame(tick);
   });
 }
-if (aboutStats) {
+if (aboutStats && 'IntersectionObserver' in window) {
   const statsObserver = new IntersectionObserver(entries => {
     if (!entries[0].isIntersecting) return;
     animateStatistics();
     statsObserver.disconnect();
-  }, { threshold: .35 });
+  }, { root: null, threshold: .2, rootMargin: '0px 0px -10% 0px' });
   statsObserver.observe(aboutStats);
+} else if (aboutStats) {
+  animateStatistics();
 }
